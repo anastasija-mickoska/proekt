@@ -1,0 +1,36 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://example.com"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://example.com">
+
+    <wsdl:message name="GetDiscountsRequest">
+        <wsdl:part name="parameters" element="tns:GetDiscountsRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetDiscountsResponse">
+        <wsdl:part name="parameters" element="tns:GetAllDiscountsResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="DiscountServicePortType">
+        <wsdl:operation name="getDiscounts">
+            <wsdl:input message="tns:GetDiscountsRequest"/>
+            <wsdl:output message="tns:GetDiscountsResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="DiscountServiceBinding" type="tns:DiscountServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getDiscounts">
+            <soap:operation soapAction="http://example.com/getDiscounts"/>
+            <soap:body use="literal"/>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="DiscountService">
+        <wsdl:port name="DiscountServicePort" binding="tns:DiscountServiceBinding">
+            <soap:address location="http://localhost:8080/ws/discounts"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
