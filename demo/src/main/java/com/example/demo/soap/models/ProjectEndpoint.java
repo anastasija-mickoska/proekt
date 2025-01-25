@@ -6,6 +6,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import com.example.demo.service.BookingService;
 import com.example.demo.service.DiscountService;
+import java.util.List;
 
 @Endpoint
 public class ProjectEndpoint {
@@ -35,6 +36,18 @@ public class ProjectEndpoint {
     public GetAllDiscountsResponse getDiscounts() {
         GetAllDiscountsResponse response = new GetAllDiscountsResponse();
         response.setDiscounts(discountService.getAllDiscounts());
+        return response;
+    }
+
+    // Method 3: Sort Discounts by discount value
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetSortedDiscountsRequest")
+    @ResponsePayload
+    public GetSortedDiscountsResponse getSortedDiscounts() {
+        List<com.example.demo.soap.models.Discount> sortedDiscounts = discountService.getSortedDiscounts();
+    
+
+        GetSortedDiscountsResponse response = new GetSortedDiscountsResponse();
+        response.setDiscounts(sortedDiscounts);
         return response;
     }
     

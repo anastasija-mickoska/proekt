@@ -29,6 +29,16 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="GetSortedDiscountsRequest" type="xs:empty"/>
+
+    <xs:element name="GetSortedDiscountsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="discounts" type="tns:Discount" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="BookingDTO">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>

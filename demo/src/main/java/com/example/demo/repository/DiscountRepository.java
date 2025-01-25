@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DiscountRepository extends JpaRepository<Discount, Integer> {
-    // Custom query methods can be defined here, if needed
+    
 }
