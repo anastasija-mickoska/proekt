@@ -1,13 +1,41 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:element name="GetAllDiscountsRequest" type="xs:anyType"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.com"
+           xmlns:tns="http://example.com"
+           elementFormDefault="qualified">
+
+    <xs:element name="GetAllDiscountsRequest" type="xs:empty"/>
 
     <xs:element name="GetAllDiscountsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="discounts" type="Discount" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element name="discounts" type="tns:Discount" maxOccurs="unbounded" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="GetUserBookingsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetUserBookingsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="bookings" type="tns:BookingDTO" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="BookingDTO">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="discountDescription" type="xs:string"/>
+            <xs:element name="reservationDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:complexType name="Discount">
         <xs:sequence>
@@ -22,4 +50,5 @@
             <xs:element name="status" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+
 </xs:schema>
