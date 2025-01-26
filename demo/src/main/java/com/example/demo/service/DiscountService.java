@@ -35,4 +35,8 @@ public class DiscountService {
         discounts.sort((d1, d2) -> Double.compare(d2.getDiscountValue(), d1.getDiscountValue()));
         return discounts;
     }
+
+    public List<Discount> filterDiscountsByDestination(String destination) {
+        return discountRepository.filterByDestination(destination);
+    }
 }

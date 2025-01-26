@@ -1,3 +1,9 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.runtimes": [
+        {
+          "name": "JavaSE-19",
+          "path": "D:\\Program Files(x86)\\Java\\jdk-19"
+        }
+      ]
 }
