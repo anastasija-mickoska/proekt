@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Discount;
 import com.example.demo.repository.DiscountRepository;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class DiscountService {
@@ -38,5 +39,36 @@ public class DiscountService {
 
     public List<Discount> filterDiscountsByDestination(String destination) {
         return discountRepository.filterByDestination(destination);
+    }
+
+    public Discount updateDiscount(Integer id, Discount updatedDiscount) {
+        Discount discount = discountRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Discount not found with ID: " + id));
+        if (updatedDiscount.getDescription() != null) {
+            discount.setDescription(updatedDiscount.getDescription());
+        }
+        if (updatedDiscount.getDiscountValue() != 0) {
+            discount.setDiscountValue(updatedDiscount.getDiscountValue());
+        }
+        if (updatedDiscount.getDiscountType() != null) {
+            discount.setDiscountType(updatedDiscount.getDiscountType());
+        }
+        if (updatedDiscount.getPrice() != 0) {
+            discount.setPrice(updatedDiscount.getPrice());
+        }
+        if (updatedDiscount.getStartDate() != null) {
+            discount.setStartDate(updatedDiscount.getStartDate());
+        }
+        if (updatedDiscount.getEndDate() != null) {
+            discount.setEndDate(updatedDiscount.getEndDate());
+        }
+        if (updatedDiscount.getStatus() != null) {
+            discount.setStatus(updatedDiscount.getStatus());
+        }
+        if (updatedDiscount.getDestination() != null) {
+            discount.setDestination(updatedDiscount.getDestination());
+        }
+
+        return discountRepository.save(discount);
     }
 }
