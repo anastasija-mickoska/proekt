@@ -51,4 +51,26 @@ public class BookingService {
 
         return bookingRepository.save(booking);
     }
+
+    //get all bookings
+
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
+    }
+
+    //find booking by id
+
+    public Booking getBookingById(Integer id) {
+        return bookingRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Booking not found with ID: " + id));
+    }
+
+    //delete a booking  
+
+    public void deleteBooking(Integer id) {
+        if (!bookingRepository.existsById(id)) {
+            throw new IllegalArgumentException("Booking not found with ID: " + id);
+        }
+        bookingRepository.deleteById(id);
+    }
 }

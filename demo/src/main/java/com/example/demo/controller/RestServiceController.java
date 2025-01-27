@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -56,5 +57,23 @@ public class RestServiceController {
     public ResponseEntity<Booking> addBooking(@RequestParam Integer userId, @RequestParam Integer discountId, @RequestParam Date reservationDate) {
         Booking booking = bookingService.addBooking(userId, discountId, reservationDate);
         return ResponseEntity.ok(booking);
+    }
+
+    @GetMapping("/bookings")
+    public ResponseEntity<List<Booking>> getAllBookings() {
+        List<Booking> bookings = bookingService.getAllBookings();
+        return ResponseEntity.ok(bookings);
+    }
+
+    @GetMapping("/bookings/{id}")
+    public ResponseEntity<Booking> getBookingById(@PathVariable Integer id) {
+        Booking booking = bookingService.getBookingById(id);
+        return ResponseEntity.ok(booking);
+    }
+
+    @DeleteMapping("/bookings/{id}")
+    public ResponseEntity<Void> deleteBooking(@PathVariable Integer id) {
+        bookingService.deleteBooking(id);
+        return ResponseEntity.noContent().build();
     }
 }
